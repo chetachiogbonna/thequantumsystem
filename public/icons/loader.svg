@@ -1,0 +1,28 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <g transform="rotate(0 50 50)">
+    <!-- Top Arc -->
+    <path
+      d="M35,35 A20,20 0 0,1 65,35"
+      fill="none"
+      stroke="#2A7AFD"
+      stroke-width="8"
+      stroke-linecap="round" />
+
+    <!-- Bottom Arc -->
+    <path
+      d="M35,65 A20,20 0 0,0 65,65"
+      fill="none"
+      stroke="#2A7AFD"
+      stroke-width="8"
+      stroke-linecap="round" />
+
+    <!-- Rotation Animation -->
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      from="0 50 50"
+      to="360 50 50"
+      dur="1s"
+      repeatCount="indefinite" />
+  </g>
+</svg>
