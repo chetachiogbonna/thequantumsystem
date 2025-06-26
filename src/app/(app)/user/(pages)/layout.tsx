@@ -16,6 +16,7 @@ function UserLayout({ children }: { children: React.ReactNode }) {
 
   const pathname = usePathname()
   const isdashBoardpage = pathname === "/user/dashboard"
+  const iscardpage = pathname.startsWith("/user/card")
 
   useEffect(() => {
     const getUser = async () => {
@@ -44,9 +45,9 @@ function UserLayout({ children }: { children: React.ReactNode }) {
   }, [router, setUser])
 
   return (
-    <main className={cn("min-h-screen w-full pt-16 pb-20 bg-[#f5f5fa]", isdashBoardpage && "pt-10")}>
+    <main className={cn("min-h-screen w-full pt-16 pb-20 bg-[#f5f5fa]", isdashBoardpage && "pt-10", iscardpage && "pt-10 pb-0")}>
       <Header />
-      <div className={cn("max-w-7xl mx-auto py-3 md:py-6 px-2", isdashBoardpage && "max-w-full px-0")}>
+      <div className={cn("max-w-7xl mx-auto py-3 md:py-6 px-2", (isdashBoardpage || iscardpage) && "max-w-full px-0")}>
         {children}
       </div>
       <Footer />
