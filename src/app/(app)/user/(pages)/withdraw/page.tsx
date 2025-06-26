@@ -6,7 +6,7 @@ import { FormEvent, useState } from "react";
 import { toast } from "sonner";
 
 function Withdraw() {
-  const [coinType, setCoinType] = useState("")
+  const [cardType, setCardType] = useState("")
   
   const [show, setShow] = useState(false);
 
@@ -32,38 +32,33 @@ function Withdraw() {
             <label className="block text-black mb-1 text-xs font-semibold">Withdraw To</label>
             <select 
               required 
-              value={coinType} 
-              onChange={(e) => setCoinType(e.target.value)} 
-              className="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#42a5f5]"
+              value={cardType} 
+              onChange={(e) => setCardType(e.target.value)} 
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#42a5f5] mb-2"
             >
-              <option value="">Select One</option>
-              <option value="ADA">ADA</option>
-              <option value="Bitcoin">Bitcoin</option>
-              <option value="BNB">BNB</option>
-              <option value="DOGE">DOGE</option>
-              <option value="Ethereum">Ethereum</option>
-              <option value="LTC">LTC</option>
-              <option value="USDT">USDT ERC20</option>
-              <option value="XLM">XLM</option>
-              <option value="XRP">XRP</option>
+              <option value="">Select Card Type</option>
+              <option value="Debit Card">Debit Card</option>
+              <option value="Credit Card">Credit Card</option>
+              <option value="Visa Card">Visa Card</option>
+              <option value="Mastercard">Mastercard</option>
             </select>
             
-            <label className="block text-black mb-1 text-xs font-semibold">{coinType} Wallet address</label>
+            <label className="block text-black mb-1 text-xs font-semibold">{cardType ? cardType : "Card"} number</label>
             <input
-              type="text"
+              type="number"
               required 
-              placeholder={`Enter your ${coinType} wallet address`}
-              className="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#42a5f5]"
+              placeholder="Enter Card number"
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#42a5f5] mb-2"
             />
 
-            <label className="block text-black mb-1 text-xs font-semibold">Amount (USD)</label>
+            <label className="block text-black mb-1 text-xs font-semibold">Amount</label>
             <input
               type="number"
               id="amount"
               required 
               min="0"
               placeholder="Enter amount"
-              className="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#42a5f5]"
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#42a5f5] mb-2"
             />
           </div>
           <hr />

@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { getAllTickets } from "@/lib/actions/ticket"
+import { getTicketsIdByUidAndId } from "@/lib/actions/ticket"
 import { formatTimeAgo } from "@/lib/utils"
 import { AlertOctagon } from "lucide-react"
 import TicketActionDropdownmenu from "@/components/TicketActionDropdownmenu"
@@ -35,9 +35,10 @@ async function Ticket() {
   }
       
   try {
-    const [tickets, user] = await Promise.all([getAllTickets(), getCurrentUser()])
-
+    const user = await getCurrentUser()
     if (!user) throw new Error("An error occured.")
+
+    const tickets = await getTicketsIdByUidAndId(user?.uid);
 
     return (
       <div className="md:px-4">
