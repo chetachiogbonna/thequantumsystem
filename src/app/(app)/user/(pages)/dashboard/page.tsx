@@ -10,7 +10,7 @@ import { calculateUserTotalCoinsInUSD } from "@/lib/utils";
 type CoinSymbol = keyof User["coins"];
 
 function Dashboard() {
-  const user = useUserStore((state) => state.user);
+  const { user } = useUserStore();
   const [prices, setPrices] = useState<any>({});
 
   const [show, setShow] = useState(false);
@@ -39,7 +39,7 @@ function Dashboard() {
               ${user ? calculateUserTotalCoinsInUSD(user.coins, prices).toFixed(2) : "0.00"}
             </p>
             <>
-              {!user?.kyc 
+              {!user?.kyc
                 ? (
                   <p className="text-red-500 w-full">
                     Not Verified{" "}
@@ -50,7 +50,7 @@ function Dashboard() {
                       Verify Now
                     </Link>
                   </p>
-                ): user?.kyc.status === "pending"
+                ) : user?.kyc.status === "pending"
                   ? <p className="text-gray-500 w-full">Verification Pending</p>
                   : user?.kyc.status === "rejected"
                     ? (
@@ -111,7 +111,7 @@ function Dashboard() {
                       {Array.isArray(route) && route.map(({ url, icon }) => {
                         return (
                           <Link key={url} href={url} target="_blank">
-                            <Image 
+                            <Image
                               src={icon}
                               alt="Buy"
                               width={80}
@@ -164,8 +164,8 @@ function Dashboard() {
             change > 0
               ? "text-green-500"
               : change < 0
-              ? "text-red-500"
-              : "text-gray-400";
+                ? "text-red-500"
+                : "text-gray-400";
           return (
             <Link target="_blank" href={coin.live_link}
               key={coin.id}

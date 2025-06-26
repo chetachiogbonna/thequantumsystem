@@ -115,12 +115,13 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
     overflow-x: hidden;
     font-family: "Rubik", sans-serif;
   }
-  
+
   button {
     cursor: pointer;
   }
@@ -130,6 +131,7 @@
   0% {
     transform: scale(1.05);
   }
+
   100% {
     transform: scale(0.95);
   }

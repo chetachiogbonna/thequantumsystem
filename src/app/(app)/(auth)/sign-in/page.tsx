@@ -63,7 +63,7 @@ function SignIn() {
   }
 
   return (
-    <div className="min-h-screen px-5 flex items-center justify-center bg-[url('/images/hero-bg.jpg')]">
+    <div className="min-h-screen px-5 flex items-center justify-center bg-[url('/images/hero-bg.jpg')] bg-no-repeat bg-cover">
       <Link href="/" className="absolute top-4 left-4 md:top-10 md:left-20">
         <Logo width={150} />
       </Link>

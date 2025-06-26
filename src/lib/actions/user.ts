@@ -24,7 +24,7 @@ export async function getUserByUidWithWalletStatus(uid: string) {
         (walletDoc.data()?.privatekey && walletDoc.data()?.private.length > 0)
       );
 
-    const user =  {
+    const user = {
       uid: docSnap.id,
       emailVerified: userData?.emailVerified,
       ...userData,
@@ -99,7 +99,7 @@ export async function deletePhoto(fileId: string) {
     throw error;
   }
 }
-  
+
 export async function storeUserKycDocument(uid: string, kycType: string, kycUrl: string) {
   try {
     const docRef = adminDb.collection("users").doc(uid);
@@ -107,7 +107,7 @@ export async function storeUserKycDocument(uid: string, kycType: string, kycUrl:
     if (!docSnap.exists) {
       throw new Error("User document does not exist");
     }
-    
+
     if (!kycType) {
       throw new Error("KYC type is required");
     }
@@ -210,8 +210,8 @@ export async function updateUserKycStatus(uid: string, status: "approved" | "rej
     email: userDoc.data()?.email,
     emailVerified: userDoc.data()?.emailVerified,
     userName: userDoc.data()?.userName,
-    fullName: userDoc.data()?.fullName, 
-    lastName: userDoc.data()?.lastName, 
+    fullName: userDoc.data()?.fullName,
+    lastName: userDoc.data()?.lastName,
     address: userDoc.data()?.address,
     country: userDoc.data()?.country,
     phone: userDoc.data()?.phone,
@@ -229,20 +229,20 @@ export async function updateUserKycStatus(uid: string, status: "approved" | "rej
 export const getUserByEmail = async (email: string) => {
   try {
     const snapshot = await adminDb.collection("users").where("email", "==", email).limit(1).get();
-  
+
     if (snapshot.empty) {
       throw new Error("User not found");
     }
-  
+
     const userDoc = snapshot.docs[0];
-  
+
     const user = {
       uid: userDoc.data()?.uid,
       email: userDoc.data()?.email,
       emailVerified: userDoc.data()?.emailVerified,
       userName: userDoc.data()?.userName,
-      fullName: userDoc.data()?.fullName, 
-      lastName: userDoc.data()?.lastName, 
+      fullName: userDoc.data()?.fullName,
+      lastName: userDoc.data()?.lastName,
       address: userDoc.data()?.address,
       country: userDoc.data()?.country,
       phone: userDoc.data()?.phone,
@@ -253,7 +253,7 @@ export const getUserByEmail = async (email: string) => {
       kyc: userDoc.data()?.kyc,
       coins: userDoc.data()?.coins,
     } as User;
-  
+
     return parseStringify(user);
   } catch (error) {
     throw error
@@ -263,18 +263,18 @@ export const getUserByEmail = async (email: string) => {
 export const getUserById = async (id: string) => {
   try {
     const userDoc = await adminDb.collection("users").doc(id).get();
-  
+
     if (!userDoc.exists) {
       throw new Error("User not found");
     }
-    
+
     const user = {
       uid: userDoc.data()?.uid,
       email: userDoc.data()?.email,
       emailVerified: userDoc.data()?.emailVerified,
       userName: userDoc.data()?.userName,
-      fullName: userDoc.data()?.fullName, 
-      lastName: userDoc.data()?.lastName, 
+      fullName: userDoc.data()?.fullName,
+      lastName: userDoc.data()?.lastName,
       address: userDoc.data()?.address,
       country: userDoc.data()?.country,
       phone: userDoc.data()?.phone,
@@ -285,7 +285,7 @@ export const getUserById = async (id: string) => {
       kyc: userDoc.data()?.kyc,
       coins: userDoc.data()?.coins,
     } as User;
-  
+
     return parseStringify(user);
   } catch (error) {
     throw error
@@ -341,5 +341,19 @@ export const verifyCurrentPassword = async (email: string, currentPassword: stri
     return {};
   } catch {
     return { error: "Invalid current password" };
+  }
+}
+
+export async function activateUserCard(userId: string, activationType: "silver" | "gold") {
+  try {
+    const userRef = adminDb.collection("users").doc(userId);
+
+    await userRef.update({
+      activation: {
+        [activationType]: true,
+      }
+    });
+  } catch (error) {
+    throw error;
   }
 }

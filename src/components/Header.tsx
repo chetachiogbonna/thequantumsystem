@@ -7,20 +7,20 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 export default function Header() {
-  const user = useUserStore((state) => state.user);
+  const { user } = useUserStore();
   const pathname = usePathname();
 
   return (
     <header className="w-full bg-[#0f054c] z-100">
       <div className="max-w-7xl mx-auto px-4">
         <nav className="flex flex-col lg:flex-row justify-center md:justify-between items-center pb-6">
-          <div className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <Image src="/logo.png" alt="Logo" width={100} height={100} />
             <span className="font-semibold text-xl  md:text-2xl text-[#3b9af1] tracking-wide drop-shadow">
               The Quantum System
             </span>
-          </div>
-          
+          </Link>
+
           <ul className="flex items-center gap-4 md:gap-8 text-base font-medium mb-5 md:mb-0">
             <li>
               <Link href="/" className={cn("hover:text-[#3b9af1] text-white transition", pathname === "/" && "text-[#3b9af1]")}>
@@ -43,13 +43,13 @@ export default function Header() {
               </Link>
             </li>
           </ul>
-          
+
           {user
             ? (
               <Link href="/user/dashboard">
                 <Image src="/default.png" alt="profile" width={35} height={35} />
               </Link>
-            ): (
+            ) : (
               <div className="flex items-center gap-4">
                 <Link
                   href="/sign-in"
@@ -64,7 +64,7 @@ export default function Header() {
                   Register
                 </Link>
               </div>
-            ) 
+            )
           }
         </nav>
       </div>

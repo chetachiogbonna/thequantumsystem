@@ -18,6 +18,10 @@ type User = {
     uploadedAt: string;
     status: "pending" | "approved" | "rejected";
   };
+  activation?: {
+    silver?: boolean
+    gold?: boolean
+  };
   coins: {
     XLM: number,
     XRP: number,

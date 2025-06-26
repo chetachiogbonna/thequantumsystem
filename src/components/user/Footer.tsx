@@ -20,24 +20,24 @@ function Footer() {
 
   return (
     <>
-      <footer className="fixed left-0 right-0 bottom-0 bg-black">
+      <footer className="fixed left-0 right-0 bottom-0 bg-black h-16">
         <div className="flex justify-around items-center px-1 py-4">
           {dashBoardFooterLinks.map(({ label, icon, route }) => {
             return label === "logout" || !route
               ? (
-                <button 
+                <button
                   onClick={signUserOut}
                   key={label} className="text-xs text-center text-white capitalize flex flex-col justify-center items-center">
                   <Image width={18} height={18} className="w-5 h-5 text-white" src={icon} alt="icon" />
                   <span>{label}</span>
                 </button>
-              ): (
+              ) : (
                 <Link key={label} href={route} className="text-xs text-center text-white capitalize flex flex-col justify-center items-center">
                   <Image width={18} height={18} className="w-5 h-5 text-white" src={icon} alt="icon" />
                   <span>{label}</span>
                 </Link>
               )
-          })} 
+          })}
         </div>
       </footer>
 

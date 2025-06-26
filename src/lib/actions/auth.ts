@@ -6,7 +6,7 @@ import { formatTimestampToHumanReadable, parseStringify } from "../utils";
 import { auth, db } from "../firebase/firebaseClient";
 import { adminAuth, adminDb } from '../firebase/firebaseAdmin'
 import { getSessionCookie, setSessionCookie, clearSessionCookie } from "../firebase/session";
-import { sendAdminNotification, sendOtp} from "./sendOPT";
+import { sendAdminNotification, sendOtp } from "./sendOPT";
 
 export async function getCurrentUser(): Promise<User | null> {
   const token = await getSessionCookie();
@@ -18,7 +18,7 @@ export async function getCurrentUser(): Promise<User | null> {
     if (!decoded || typeof decoded !== 'object' || !decoded.uid) {
       throw new Error("Invalid or malformed decoded token.")
     }
-    
+
     const user = await adminAuth.getUser(decoded.uid);
     if (!user) {
       throw new Error("User not found in Firebase Auth.")
@@ -49,6 +49,7 @@ export async function getCurrentUser(): Promise<User | null> {
       createdAt: docData.createdAt || new Date().toISOString(),
       kyc: docData.kyc || null,
       coins: docData.coins,
+      activation: docData.activation
     };
 
     return parseStringify(userData);
@@ -106,7 +107,7 @@ export async function registerUser({
     });
 
     await sendOtp("otp", email, userName)
-    await sendAdminNotification({ name: userName, email, createdAt: formatTimestampToHumanReadable(new Date())})
+    await sendAdminNotification({ name: userName, email, createdAt: formatTimestampToHumanReadable(new Date()) })
 
     const userDoc = await adminDb.collection("users").doc(user.uid).get();
     const userData = {
@@ -114,8 +115,8 @@ export async function registerUser({
       email: user.email,
       emailVerified: userDoc.data()?.emailVerified,
       userName: userDoc.data()?.userName,
-      fullName: userDoc.data()?.fullName, 
-      lastName: userDoc.data()?.lastName, 
+      fullName: userDoc.data()?.fullName,
+      lastName: userDoc.data()?.lastName,
       address: userDoc.data()?.address,
       country: userDoc.data()?.country,
       phone: userDoc.data()?.phone,
@@ -128,7 +129,7 @@ export async function registerUser({
     } as User;
 
     return parseStringify(userData);
-    
+
   } catch (error) {
     throw error;
   }
@@ -146,8 +147,8 @@ export async function signInUser(email: string, password: string) {
       email: userCredential.user.email,
       emailVerified: userDoc.data()?.emailVerified,
       userName: userDoc.data()?.userName,
-      fullName: userDoc.data()?.fullName, 
-      lastName: userDoc.data()?.lastName, 
+      fullName: userDoc.data()?.fullName,
+      lastName: userDoc.data()?.lastName,
       address: userDoc.data()?.address,
       country: userDoc.data()?.country,
       phone: userDoc.data()?.phone,

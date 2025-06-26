@@ -2,16 +2,21 @@
 
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useUserStore } from "@/lib/store/userStore";
 import { FormEvent, useState } from "react";
 import { toast } from "sonner";
 
 function Withdraw() {
-  const [coinType, setCoinType] = useState("")
-  
+  const { user } = useUserStore()
+
+  const [cardType, setCardType] = useState("")
+
   const [show, setShow] = useState(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!user?.activation) return toast.error("Card not activated. You must actvate a card before you withdaw.", { description: "Please visit the card page to activate a card." })
 
     const amountInput = document.getElementById("amount") as HTMLInputElement
     const amout = amountInput.valueAsNumber;
@@ -28,42 +33,35 @@ function Withdraw() {
       <div className="bg-white rounded-xl shadow p-4 sm:p-6 w-full max-w-md h-min">
         <h2 className="text-lg font-semibold mb-4">Withdraw Funds</h2>
         <form className="space-y-4" onSubmit={handleSubmit}>
-          <div className="className="space-y-6>
-            <label className="block text-black mb-1 text-xs font-semibold">Withdraw To</label>
-            <select 
-              required 
-              value={coinType} 
-              onChange={(e) => setCoinType(e.target.value)} 
-              className="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#42a5f5]"
+          <div>
+            <label className="block text-black mb-1 text-xs font-semibold">Withdraw To TQS Card</label>
+            <select
+              required
+              value={cardType}
+              onChange={(e) => setCardType(e.target.value)}
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#42a5f5] mb-2"
             >
-              <option value="">Select One</option>
-              <option value="ADA">ADA</option>
-              <option value="Bitcoin">Bitcoin</option>
-              <option value="BNB">BNB</option>
-              <option value="DOGE">DOGE</option>
-              <option value="Ethereum">Ethereum</option>
-              <option value="LTC">LTC</option>
-              <option value="USDT">USDT ERC20</option>
-              <option value="XLM">XLM</option>
-              <option value="XRP">XRP</option>
+              <option value="">Select Card Type</option>
+              <option value="Silver Card">Silver Card</option>
+              <option value="Gold Card">Gold Card</option>
             </select>
-            
-            <label className="block text-black mb-1 text-xs font-semibold">{coinType} Wallet address</label>
+
+            <label className="block text-black mb-1 text-xs font-semibold">{cardType ? cardType : "Card"} number</label>
             <input
-              type="text"
-              required 
-              placeholder={`Enter your ${coinType} wallet address`}
-              className="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#42a5f5]"
+              type="number"
+              required
+              placeholder="Enter Card number"
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#42a5f5] mb-2"
             />
 
-            <label className="block text-black mb-1 text-xs font-semibold">Amount (USD)</label>
+            <label className="block text-black mb-1 text-xs font-semibold">Amount</label>
             <input
               type="number"
               id="amount"
-              required 
+              required
               min="0"
               placeholder="Enter amount"
-              className="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#42a5f5]"
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:border-[#42a5f5] mb-2"
             />
           </div>
           <hr />

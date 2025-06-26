@@ -15,10 +15,10 @@ function UpdateCoinBalanceButton({ user }: { user: User }) {
   const handleClick = async () => {
     if (!type) return toast.error("Please choose the type of coin to add new balance.")
 
-    if (!Boolean(newBalance) || newBalance < 0 || newBalance === 0) {
-      return toast.error("New balance must be greater than zero.")
+    if (newBalance < 0) {
+      return toast.error("New balance must not be less than zero.")
     }
-    
+
     try {
       startTransition(async () => {
         await updateUserCoinBalanceAction(user, type, newBalance)
@@ -52,12 +52,14 @@ function UpdateCoinBalanceButton({ user }: { user: User }) {
         </select>
       </TableCell>
       <TableCell className="text-gray-500">
-        <input 
+        <input
           type="number"
           value={newBalance}
           className="border pl-2"
           min={1}
-          onChange={(e) => setNewBalance(e.target.valueAsNumber ?? 0)}
+          onChange={(e) => {
+            setNewBalance(Boolean(e.target.valueAsNumber) ? e.target.valueAsNumber : 0)
+          }}
         />
       </TableCell>
       <TableCell>

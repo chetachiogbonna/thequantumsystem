@@ -1,79 +1,79 @@
 export const dashBoardFooterLinks = [
-    {
-        label: "settings",
-        icon: "/icons/setting.svg",
-        route: "/user/profile-setting" 
-    },
-    {
-        label: "notifications",
-        icon: "/icons/notification.svg",
-        route: "/user/transactions" 
-    },
-    {
-        label: "wallet",
-        icon: "/icons/wallet.svg",
-        route: "/user/dashboard" 
-    },
-    {
-        label: "support",
-        icon: "/icons/support.svg",
-        route: "/user/ticket" 
-    },
-    {
-      label: "smart & earn",
-      icon: "/icons/smart-and-earn.svg",
-      route: "/user/smart-and-earn"
-    },
-    {
-        label: "logout",
-        icon: "/icons/logout.svg"
-    }
+  {
+    label: "settings",
+    icon: "/icons/setting.svg",
+    route: "/user/profile-setting"
+  },
+  {
+    label: "notifications",
+    icon: "/icons/notification.svg",
+    route: "/user/transactions"
+  },
+  {
+    label: "wallet",
+    icon: "/icons/wallet.svg",
+    route: "/user/dashboard"
+  },
+  {
+    label: "support",
+    icon: "/icons/support.svg",
+    route: "/user/ticket"
+  },
+  {
+    label: "card",
+    icon: "/icons/credit-card.svg",
+    route: "/user/card"
+  },
+  {
+    label: "logout",
+    icon: "/icons/logout.svg"
+  }
 ]
 
 export const transactions = [
-    {
-        name: "Buy",
-        image: ["/images/visa.svg", "/images/mastercard.svg"],
-        colour: "white",
-        route: [
-          {
-            url: "https://www.moonpay.com/buy",
-            icon: "/buy/logo-full-purple.svg"
-          },
-          {
-            url: "https://global.transak.com/",
-            icon: "/buy/transak-logo.svg"
-          },
-          {
-            url: "https://ramp.network/buy/",
-            icon: "/buy/ramp.svg"
-          }
-        ]
-    },
-    {
-        name: "Send",
-        image: "/icons/send.svg",
-        colour: "#FF396F",
-        route: "/user/withdraw"
-    },
-    {
-        name: "Receive",
-        image: "/icons/receive.svg",
-        colour: "#0B6EFD",
-        route: "/user/deposit"
-    },
-    {
-        name: "Swap",
-        image: "/icons/swap.svg",
-        colour: "#FFB400",
-        route: "/user/ticket"
-    },
-    {
-        name: "Link Wallet",
-        image: "/icons/link-wallet.svg",
-        colour: "#0B6EFD",
-        route: "/link-wallet"
-    },
+  {
+    name: "Buy",
+    image: ["/images/visa.svg", "/images/mastercard.svg"],
+    colour: "white",
+    route: [
+      {
+        url: "https://www.moonpay.com/buy",
+        icon: "/buy/logo-full-purple.svg"
+      },
+      {
+        url: "https://global.transak.com/",
+        icon: "/buy/transak-logo.svg"
+      },
+      {
+        url: "https://ramp.network/buy/",
+        icon: "/buy/ramp.svg"
+      }
+    ]
+  },
+  {
+    name: "Send",
+    image: "/icons/send.svg",
+    colour: "#FF396F",
+    route: "/user/withdraw"
+  },
+  {
+    name: "Receive",
+    image: "/icons/receive.svg",
+    colour: "#0B6EFD",
+    route: "/user/deposit"
+  },
+  {
+    name: "Swap",
+    image: "/icons/swap.svg",
+    colour: "#FFB400",
+    route: "/user/ticket"
+  },
+  {
+    name: "Link Wallet",
+    image: "/icons/link-wallet.svg",
+    colour: "#0B6EFD",
+    route: "/link-wallet"
+  },
 ]
 
 export const COINS = [

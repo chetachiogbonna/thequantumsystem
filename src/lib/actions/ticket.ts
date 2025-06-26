@@ -109,6 +109,33 @@ export const getTicketIdByUidAndId = async (
   return doc.id;
 };
 
+export const getTicketsIdByUidAndId = async (
+  uid: string,
+) => {
+  const q = query(
+    collection(db, "tickets"),
+    where("uid", "==", uid),
+  );
+
+  const snapshot = await getDocs(q);
+
+  const tickets = snapshot.docs.map((doc) => {
+    return {
+      id: doc.id,
+      uid: doc.data()?.uid,
+      ticketId: doc.data()?.ticketId,
+      subject: doc.data()?.subject,
+      status: doc.data()?.status,
+      priority: doc.data()?.priority,
+      messages: doc.data()?.messages,
+      createdAt: doc.data().createdAt?.toDate?.() || new Date(),
+      updatedAt: doc.data().updatedAt?.toDate?.() || new Date(),
+    } as Ticket
+  })
+
+  return parseStringify(tickets);
+};
+
 export const replyToTicket = async ({
   id,
   ticketId,
